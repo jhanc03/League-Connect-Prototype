@@ -1,6 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
+//https://docs.expo.dev/versions/latest/sdk/location/
+import * as Location from 'expo-location';
+
 export default function App() {
   return (
     <View style={styles.container}>
