@@ -13,11 +13,10 @@ import MessagesScreen from './screens/MessagesScreen';
 
 import DiscoverScreen from './screens/DiscoverScreen';
 
+import TestScreen from './screens/TestScreen';
 
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-
-//https://docs.expo.dev/versions/latest/sdk/location/
-import * as Location from 'expo-location';
 
 function App() {
   return (
@@ -40,7 +39,16 @@ const DiscoverNav = () => {
   const Stack = createStackNavigator()
   return (
     <Stack.Navigator screenOptions={{headerStyle: styles.header, headerTitleStyle: styles.headerText}}>
-      <Stack.Screen name="Social" component={DiscoverScreen} />
+      <Stack.Screen name="Discover" component={DiscoverScreen} />
+    </Stack.Navigator>
+  );
+}
+
+const TestNav = () => {
+  const Stack = createStackNavigator()
+  return (
+    <Stack.Navigator screenOptions={{headerStyle: styles.header, headerTitleStyle: styles.headerText}}>
+      <Stack.Screen name="Test" component={TestScreen} />
     </Stack.Navigator>
   );
 }
@@ -63,7 +71,16 @@ const TabNav = () => {
         component={DiscoverNav}
         options={{
           tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="android-messages" color={color} size={size}/>
+          <MaterialIcons name="location-on" color={color} size={size}/>
+          )
+        }}
+      />
+      <Tab.Screen
+        name="Test"
+        component={TestNav}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+          <MaterialIcons name="science" color={color} size={size}/>
           )
         }}
       />

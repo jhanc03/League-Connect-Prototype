@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { Image } from 'expo-image';
 
-const FriendsListScreen = ({ navigation }) => {
+const SocialScreen = ({ navigation }) => {
   const [friends, setFriends] = useState([
     { id: 1, username: 'John', avatar: 'LoL_Icon_Rendered_Hi-Res.png' },
     { id: 2, username: 'Alice' },
@@ -45,7 +45,7 @@ const FriendsListScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <FlatList
+      <FlatList //Change to scroll list <<<<<<<<<<<<<<<<<<<<<<<<
         data={friends}
         renderItem={renderFriend}
         keyExtractor={item => item.id}
@@ -79,4 +79,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FriendsListScreen;
+export default SocialScreen;
