@@ -1,40 +1,55 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { Image } from 'expo-image';
 
-const MessagingScreen = () => {
-  const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState('');
+const FriendsListScreen = ({ navigation }) => {
+  const [friends, setFriends] = useState([
+    { id: 1, username: 'John', avatar: 'LoL_Icon_Rendered_Hi-Res.png' },
+    { id: 2, username: 'Alice' },
+    { id: 3, username: 'Bob' },
+    { id: 4, username: 'Emma' },
+    { id: 5, username: 'Michael' },
+  ]);
 
-  const sendMessage = () => {
-    if (newMessage.trim() === '') return;
-    setMessages([...messages, { text: newMessage, id: messages.length }]);
-    setNewMessage('');
+  const handleFriendPress = (friend) => {
+    //Alert.alert('Friend Selected', `You selected: ${friend.username}`);
+    navigation.navigate('Messages');
+  };
+
+  const Friend = ({friend, onPress, backgroundColor, textColor}) => (
+      <TouchableOpacity onPress={onPress} style={[styles.friendItem, {backgroundColor}]}>
+        <Image
+          style={styles.friendAvatar}
+          source={require('../assets/LoL_Icon_Rendered_Hi-Res.png')}
+          contentFit="cover"
+          //resizeMode="contain"
+          transition={400}
+        />
+        <Text style={[styles.friendUsername, {color: textColor}]}>{friend.username}</Text>
+      </TouchableOpacity>
+  );
+
+  const renderFriend = ({item}) => {
+    //const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
+    //const color = item.id === selectedId ? 'white' : 'black';
+
+    return (
+      <Friend
+        friend={item}
+        onPress={() => handleFriendPress(item)}
+        backgroundColor={'#fff'}
+        textColor={'#000'}
+      />
+    );
   };
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={messages}
-        renderItem={({ item }) => (
-          <View style={styles.messageBubble}>
-            <Text style={styles.messageText}>{item.text}</Text>
-          </View>
-        )}
-        keyExtractor={(item) => item.id.toString()}
-        inverted
+        data={friends}
+        renderItem={renderFriend}
+        keyExtractor={item => item.id}
       />
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          value={newMessage}
-          onChangeText={(text) => setNewMessage(text)}
-          placeholder="Type your message..."
-          onSubmitEditing={sendMessage}
-        />
-        <TouchableOpacity style={styles.sendButton} onPress={sendMessage}>
-          <Text style={styles.sendButtonText}>Send</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
@@ -42,44 +57,26 @@ const MessagingScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
-    padding: 10,
-  },
-  messageBubble: {
-    backgroundColor: '#007AFF',
-    borderRadius: 10,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    marginBottom: 10,
-    maxWidth: '70%',
-    alignSelf: 'flex-end',
-  },
-  messageText: {
-    color: '#fff',
-    fontSize: 16,
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  input: {
-    flex: 1,
     backgroundColor: '#fff',
-    borderRadius: 20,
-    paddingHorizontal: 15,
-    marginRight: 10,
+    padding: 4,
   },
-  sendButton: {
-    backgroundColor: '#007AFF',
-    borderRadius: 20,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
+  friendItem: {
+    //borderBottomWidth: 1,
+    //borderBottomColor: '#ccc',
+    flexDirection:'row',
+    paddingVertical: 4,
   },
-  sendButtonText: {
-    color: '#fff',
-    fontSize: 16,
+  friendAvatar: {
+    width: 64,
+    height: 64,
+    marginRight: 14,
+    //backgroundColor: '#0553',
+  },
+  friendUsername: {
+    fontSize: 24,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
-export default MessagingScreen;
+export default FriendsListScreen;
