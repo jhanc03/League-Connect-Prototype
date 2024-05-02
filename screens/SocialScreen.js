@@ -32,9 +32,6 @@ const SocialScreen = ({ navigation }) => {
   );
 
   const renderFriend = ({item}) => {
-    //const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
-    //const color = item.id === selectedId ? 'white' : 'black';
-
     return (
       <Friend
         friend={item}
@@ -66,8 +63,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   friendItem: {
-    //borderBottomWidth: 1,
-    //borderBottomColor: '#ccc',
     flexDirection:'row',
     paddingVertical: 4,
   },
@@ -75,7 +70,6 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     marginRight: 14,
-    //backgroundColor: '#0553',
   },
   friendUsername: {
     fontSize: 24,

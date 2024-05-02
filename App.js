@@ -13,8 +13,6 @@ import MessagesScreen from './screens/MessagesScreen';
 
 import DiscoverScreen from './screens/DiscoverScreen';
 
-import TestScreen from './screens/TestScreen';
-
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
@@ -44,15 +42,6 @@ const DiscoverNav = () => {
   );
 }
 
-const TestNav = () => {
-  const Stack = createStackNavigator()
-  return (
-    <Stack.Navigator screenOptions={{headerStyle: styles.header, headerTitleStyle: styles.headerText}}>
-      <Stack.Screen name="Test" component={TestScreen} />
-    </Stack.Navigator>
-  );
-}
-
 const TabNav = () => {
   const Tab = createBottomTabNavigator();
   return (
@@ -72,15 +61,6 @@ const TabNav = () => {
         options={{
           tabBarIcon: ({ color, size }) => (
           <MaterialIcons name="location-on" color={color} size={size}/>
-          )
-        }}
-      />
-      <Tab.Screen
-        name="Test"
-        component={TestNav}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-          <MaterialIcons name="science" color={color} size={size}/>
           )
         }}
       />

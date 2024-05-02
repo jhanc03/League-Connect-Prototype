@@ -11,12 +11,6 @@ const MessagingScreen = ( route ) => {
     setMessages([...messages, { userSent: true, message: newMessage }]);
     setNewMessage('');
   };
-
-  const testButton = () => {
-    console.log(JSON.stringify(messages));
-    console.log(JSON.stringify(reversedMessages));
-  }
-
   
   const renderMessage = ({ item }) => {
     const isUser = item.userSent;
@@ -52,7 +46,6 @@ const MessagingScreen = ( route ) => {
         <TouchableOpacity style={styles.sendButton} onPress={sendMessage}>
           <Text style={styles.sendButtonText}>Send</Text>
         </TouchableOpacity>
-        <Button title="Yep" onPress={testButton}></Button>
       </View>
     </View>
   );
