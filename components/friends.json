@@ -1,78 +1,76 @@
 [
-    { 
+    {
         "id": 1,
         "username": "LavaRebel",
+        "avatar": "./assets/LoL_Icon_Rendered_Hi-Res.png",
         "messages": [
-            {"sender": "Summoner1", "message": "Hey, wanna play some League?"},
-            {"sender": "Summoner2", "message": "Sure, I've got some time. Let's do it!"},
-            {"sender": "Summoner1", "message": "Cool, I'll invite you to a lobby."},
-            {"sender": "Summoner2", "message": "Sounds good. ADC or Mid for me?"},
-            {"sender": "Summoner1", "message": "I'll take Mid, you go ADC."},
-            {"sender": "Summoner2", "message": "Got it. Let's carry this game!"},
-            {"sender": "Summoner1", "message": "Absolutely! Let's show them what we're made of."}
+            {"userSent": true, "message": "Hey, wanna play some League?"},
+            {"userSent": false, "message": "Sure, I've got some time. Let's do it!"},
+            {"userSent": true, "message": "Cool, I'll invite you to a lobby."},
+            {"userSent": false, "message": "Sounds good. ADC or Mid for me?"},
+            {"userSent": true, "message": "I'll take Mid, you go ADC."},
+            {"userSent": false, "message": "Got it. Let's carry this game!"},
+            {"userSent": true, "message": "Absolutely! Let's show them what we're made of."}
         ]
-        
     },
-    { 
+    {
         "id": 2,
         "username": "RadiantChase",
         "messages": [
-            {"sender": "Summoner1", "message": "Need one more for a premade. You in?"},
-            {"sender": "Summoner2", "message": "Sure, count me in."},
-            {"sender": "Summoner1", "message": "Great, I'll invite you."},
-            {"sender": "Summoner2", "message": "I'll fill. What role do you need?"},
-            {"sender": "Summoner1", "message": "Top or Jungle would be great."},
-            {"sender": "Summoner2", "message": "I'll take Jungle then. Let's get this W."},
-            {"sender": "Summoner1", "message": "Let's do it! Queueing up now."},
-            {"sender": "Summoner2", "message": "Ready when you are."}
+            {"userSent": true, "message": "Need one more for a premade. You in?"},
+            {"userSent": false, "message": "Sure, count me in."},
+            {"userSent": true, "message": "Great, I'll invite you."},
+            {"userSent": false, "message": "I'll fill. What role do you need?"},
+            {"userSent": true, "message": "Top or Jungle would be great."},
+            {"userSent": false, "message": "I'll take Jungle then. Let's get this W."},
+            {"userSent": true, "message": "Let's do it! Queueing up now."},
+            {"userSent": false, "message": "Ready when you are."}
         ]
-        
     },
-    { 
+    {
         "id": 3,
         "username": "SpectralExistence",
         "messages": [
-            {"sender": "Summoner1", "message": "Hey, wanna duo queue for a few games?"},
-            {"sender": "Summoner2", "message": "Sure thing! Let's climb some ranks."},
-            {"sender": "Summoner1", "message": "I'll lock in as support, what role are you feeling?"},
-            {"sender": "Summoner2", "message": "I'm feeling ADC tonight. Let's dominate bot lane."},
-            {"sender": "Summoner1", "message": "Sounds like a plan. I'll make sure to peel for you."},
-            {"sender": "Summoner2", "message": "Thanks, I'll carry us to victory!"},
-            {"sender": "Summoner1", "message": "Haha, I like your confidence. Let's go!"},
-            {"sender": "Summoner2", "message": "Queueing up now"}
+            {"userSent": false, "message": "Hey, wanna duo queue for a few games?"},
+            {"userSent": true, "message": "Sure thing! Let's climb some ranks."},
+            {"userSent": false, "message": "I'll lock in as support, what role are you feeling?"},
+            {"userSent": true, "message": "I'm feeling ADC tonight. Let's dominate bot lane."},
+            {"userSent": false, "message": "Sounds like a plan. I'll make sure to peel for you."},
+            {"userSent": true, "message": "Thanks, I'll carry us to victory!"},
+            {"userSent": false, "message": "Haha, I like your confidence. Let's go!"},
+            {"userSent": true, "message": "Queueing up now"}
         ]
-        
-        
     },
-    { 
+    {
         "id": 4,
         "username": "QueenShotgun",
         "messages": [
-            {"sender": "Player1", "message": "Hey, sorry I bailed on you last night."},
-            {"sender": "Player2", "message": "No worries, real life happens. We can play another time."},
-            {"sender": "Player1", "message": "Thanks for understanding, man. Let's make up for it this weekend."}
+            {"userSent": true, "message": "Hey, wanna try out that new champion with me?"},
+            {"userSent": false, "message": "Sure, why not? Always up for some experimentation."},
+            {"userSent": true, "message": "Great, let's hit up a normal game."},
+            {"userSent": true, "message": "Should we try them in a specific role?"},
+            {"userSent": false, "message": "Let's go mid and jungle. See how versatile they are."},
+            {"userSent": true, "message": "Sounds like a plan. Let's see what this champ can do."}
         ]
-        
     },
-    { 
+    {
         "id": 5,
         "username": "ChocoholicMage",
         "messages": [
-            {"sender": "Player1", "message": "I can't believe they nerfed my favorite character!"},
-            {"sender": "Player2", "message": "Tell me about it, the devs can be ruthless."},
-            {"sender": "Player1", "message": "It's like they don't care about balance anymore."},
-            {"sender": "Player2", "message": "Agreed, let's hope they fix it in the next patch."}
+            {"userSent": false, "message": "I can't believe they nerfed my favorite character!"},
+            {"userSent": true, "message": "Tell me about it, the devs can be ruthless."},
+            {"userSent": false, "message": "It's like they don't care about balance anymore."},
+            {"userSent": true, "message": "Agreed, let's hope they fix it in the next patch."}
         ]
-        
     },
     {
         "id": 6,
         "username": "PixieMenace",
         "messages": [
-            {"sender": "Player1", "message": "Bro, did you see that insane play in the tournament yesterday?"},
-            {"sender": "Player2", "message": "Yeah, it was mind-blowing! That team is on fire."},
-            {"sender": "Player1", "message": "I wish we were that good."},
-            {"sender": "Player2", "message": "Practice makes perfect, we'll get there one day."}
+            {"userSent": false, "message": "Bro, did you see that insane play in the tournament yesterday?"},
+            {"userSent": true, "message": "Yeah, it was mind-blowing! That team is on fire."},
+            {"userSent": true, "message": "I wish we were that good."},
+            {"userSent": false, "message": "Practice makes perfect, we'll get there one day."}
         ]
     }
 ]

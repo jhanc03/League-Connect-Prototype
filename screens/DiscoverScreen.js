@@ -6,11 +6,12 @@ import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 
 const DiscoverScreen = () => {
-
+  const [location, setLocation] = useState(null);
+  const [userLocation, setUserLocation] = useState([]);
   const [markers, setMarkers] = useState([]);
 
   const [nearbyPlayers, setNearbyPlayers] = useState([
-    { id: 1, username: 'Player1', coordinates: { latitude: 0, longitude: 0 } },
+    { id: 1, username: 'Player1', coordinates: { } },
     { id: 2, username: 'ThisPlayer', coordinates: { latitude: 0, longitude: 0 } },
     { id: 3, username: 'The_Player', coordinates: { latitude: 0, longitude: 0 } },
     { id: 4, username: 'theplayer27', coordinates: { latitude: 0, longitude: 0 } },
@@ -18,19 +19,28 @@ const DiscoverScreen = () => {
 
   useEffect(() => {
     (async () => {
+      console.log("Refreshed.");
+
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         alert('Location permissions denied. Returning to Social tab.'); //Do this
         return;
       }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+      setUserLocation( { latitude: location.latitude, longitude: location.longitude } );
+      console.log(location);
     })();
   }, []);
 
-  const handleMapPress = (event) => {
-    const { coordinate } = event.nativeEvent;
-    const json = JSON.stringify(nearbyPlayers);
-    console.log(json.toString());
-    setMarkers([...markers, { id: markers.length + 1, coordinate }]);
+  const handleMapPress = async (event) => {
+    let { location } = (await Location.getCurrentPositionAsync()).coords;
+    console.log(userLocation);
+    // const { coordinate } = event.nativeEvent;
+    // const json = JSON.stringify(nearbyPlayers);
+    // console.log(json.toString());
+    // setMarkers([...markers, { id: markers.length + 1, coordinate }]);
   };
 
   const generateRandomCoordinates = () => { //Use this and add deltas/width + height of map
@@ -41,20 +51,30 @@ const DiscoverScreen = () => {
 
   return (
     <View style={styles.container}>
+      {location && (
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: 53.22694,
-          longitude: -0.54806,
+          latitude: location.coords.latitude,//53.22694,
+          longitude: location.coords.longitude,//-0.54806,
           latitudeDelta: 0.0044,
           longitudeDelta: 0,
         }}
-        onPress={handleMapPress}
+        //onPress={handleMapPress}
       >
-        {markers.map((marker) => (
+        {/* {markers.map((marker) => (
           <Marker key={marker.id} coordinate={marker.coordinate} />
-        ))}
+        ))} */}
+        <Marker
+            coordinate={{
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude,
+            }}
+            title="Your Location"
+            description="This is where you are"
+          />
       </MapView>
+      )}
     </View>
   );
 };
@@ -62,6 +82,8 @@ const DiscoverScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   map: {
     width: Dimensions.get('window').width,

@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { Image } from 'expo-image';
 
 const SocialScreen = ({ navigation }) => {
-  const [friends, setFriends] = useState([
-    { id: 1, username: 'John', avatar: 'LoL_Icon_Rendered_Hi-Res.png' },
-    { id: 2, username: 'Alice' },
-    { id: 3, username: 'Bob' },
-    { id: 4, username: 'Emma' },
-    { id: 5, username: 'Michael' },
-  ]);
+  const [friends, setFriends] = useState([]);
+
+  useEffect(() => {
+    try {
+      const friendsData = require('../components/friends.json');
+      setFriends(friendsData);
+    } catch (error) {
+      console.error('Error fetching JSON data:', error);
+    }
+  }, []);
 
   const handleFriendPress = (friend) => {
-    //Alert.alert('Friend Selected', `You selected: ${friend.username}`);
-    navigation.navigate('Messages');
+    navigation.navigate('Messages', { friend });
   };
 
   const Friend = ({friend, onPress, backgroundColor, textColor}) => (
@@ -45,7 +47,7 @@ const SocialScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <FlatList //Change to scroll list <<<<<<<<<<<<<<<<<<<<<<<<
+      <FlatList style={styles.friendsList}
         data={friends}
         renderItem={renderFriend}
         keyExtractor={item => item.id}
@@ -57,8 +59,11 @@ const SocialScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#404040',
     padding: 4,
+  },
+  friendsList: {
+    flex: 1,
   },
   friendItem: {
     //borderBottomWidth: 1,

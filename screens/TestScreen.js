@@ -1,66 +1,58 @@
-import React, { useState } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Alert, Button } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
+import * as Location from 'expo-location';
 
-const FriendsListScreen = () => {
-  const [friends, setFriends] = useState([
-    { id: 1, name: 'John', coordinates: { latitude: 0, longitude: 0 } },
-    { id: 2, name: 'Alice', coordinates: { latitude: 0, longitude: 0 } },
-    { id: 3, name: 'Bob', coordinates: { latitude: 0, longitude: 0 } },
-    { id: 4, name: 'Emma', coordinates: { latitude: 0, longitude: 0 } },
-    { id: 5, name: 'Michael', coordinates: { latitude: 0, longitude: 0 } },
-  ]);
+export default function App() {
+  const [location, setLocation] = useState(null);
 
-  const handleFriendPress = (friendId) => {
-    const updatedFriends = friends.map((friend) =>
-      friend.id === friendId ? { ...friend, coordinates: generateRandomCoordinates() } : friend
-    );
-    setFriends(updatedFriends);
-  };
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        console.log('Permission to access location was denied');
+        return;
+      }
 
-  const generateRandomCoordinates = () => {
-    const latitude = Math.random() * 180 - 90; // Random latitude between -90 and 90
-    const longitude = Math.random() * 360 - 180; // Random longitude between -180 and 180
-    return { latitude, longitude };
-  };
-
-  const exportToJson = () => {
-    const json = JSON.stringify(friends);
-    Alert.alert('Friends List JSON', json);
-  };
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={friends}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleFriendPress(item.id)}>
-            <View style={styles.friendItem}>
-              <Text style={styles.friendName}>{item.name}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-        keyExtractor={(item) => item.id.toString()}
-      />
-      <Button title="Export to JSON" onPress={exportToJson} />
+      {location && (
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        >
+          <Marker
+            coordinate={{
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude,
+            }}
+            title="Your Location"
+            description="This is where you are"
+          />
+        </MapView>
+      )}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  friendItem: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    paddingVertical: 10,
-  },
-  friendName: {
-    fontSize: 18,
-    fontWeight: 'bold',
+  map: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
   },
 });
-
-export default FriendsListScreen;
